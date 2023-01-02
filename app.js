@@ -1,33 +1,32 @@
-let plusz = document.getElementById("plusz");
-    minusz = document.getElementById("minusz");
-    vissza = document.getElementById("vissza");
-    szamlalo = document.getElementById("szamlalo");
-    aktual = szamlalo.innerHTML;
-    
+const btns = document.querySelectorAll(".btn");
+let szamlalo = document.getElementById("szamlalo");
+let aktual = szamlalo.innerHTML;
 
-plusz.addEventListener("click",() => {
-    aktual++;
-    szamlalo.innerText = aktual;
-    if (aktual == 0) {
-        szamlalo.classList.remove("red");
-    } else if (aktual > 0) {
-        szamlalo.classList.add("green");
-    }
-});
+btns.forEach((btn) => {
 
-minusz.addEventListener("click",() => {
-    aktual--;
-    szamlalo.innerText = aktual;
-    if (aktual == 0) {
-        szamlalo.classList.remove("green");
-    } else if (aktual < 0) {
-        szamlalo.classList.add("red");
-    }
-});
+    btn.addEventListener("click", (e) => {
+        if (e.currentTarget.classList.contains("minusz")) {
+            aktual--;
+            if (aktual < 0) {
+                szamlalo.classList.add("red");
+            }
+        }
 
-vissza.addEventListener("click",() => {
-    szamlalo.classList.remove("green");
-    szamlalo.classList.remove("red");
-    aktual = 0;
-    szamlalo.innerText = aktual;
+        if (e.currentTarget.classList.contains("plusz")) {
+            aktual++;
+            if (aktual > 0) {
+                szamlalo.classList.add("green");
+            }
+        }
+
+        if ((e.currentTarget.classList.contains("vissza")) | (aktual == 0)) {
+            szamlalo.classList.remove("green");
+            szamlalo.classList.remove("red");
+            aktual = 0;
+        }
+
+
+        szamlalo.innerText = aktual;
+
+    })
 });
